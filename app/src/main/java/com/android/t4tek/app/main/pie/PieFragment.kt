@@ -11,11 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.android.t4tek.R
 import com.android.t4tek.app.base.BaseFragment
+import com.android.t4tek.app.main.MainActivityVM
 import com.android.t4tek.app.main.fragment.MainViewModel
 import com.android.t4tek.databinding.ActivityMainBinding
 import com.android.t4tek.databinding.FragmentPieBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
+import javax.inject.Inject
 import kotlin.random.Random
 
 @AndroidEntryPoint
@@ -27,6 +29,7 @@ class PieFragment : BaseFragment() {
 
     private var binding: FragmentPieBinding? = null
     private val viewModel: PieViewModel by viewModels()
+    private val actViewModel: MainActivityVM by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +51,9 @@ class PieFragment : BaseFragment() {
 
     private fun onclick() {
         binding?.let {
+            it.btnFetchApi.setOnClickListener {
+                actViewModel.loadUser()
+            }
             it.btnToOreo.setOnClickListener {
                 val bundle = bundleOf(
                     getString(R.string.nav_arg_to_oreo_int) to 1,
@@ -69,6 +75,7 @@ class PieFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         Timber.i("PieFragment onCreate")
     }
+
     override fun onStop() {
         super.onStop()
         Timber.i("PieFragment onStop")

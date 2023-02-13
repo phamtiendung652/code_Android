@@ -1,7 +1,7 @@
 package com.android.t4tek.data.remote
 
 import androidx.annotation.WorkerThread
-import com.android.t4tek.data.local.entity.User
+import com.android.t4tek.data.remote.response.PeopleResponse
 import com.android.utils.NetworkHelper
 import retrofit2.HttpException
 import retrofit2.Response
@@ -38,7 +38,7 @@ class ApiHelperImpl @Inject constructor(
 
     }
 
-    override suspend fun getUsers(): Response<List<User>> {
+    override suspend fun getUsers(): Response<PeopleResponse> {
         return safeApiCall { apiService.getUsers() }
     }
 }
