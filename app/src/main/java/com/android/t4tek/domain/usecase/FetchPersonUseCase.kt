@@ -10,6 +10,7 @@ import javax.inject.Inject
 class FetchPersonUseCase @Inject constructor(
     private val userRepository: UserRepository
 ) {
+    
     suspend operator fun invoke(): DataResult<List<PersonEntity>> {
         try {
             //fetch api
